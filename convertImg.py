@@ -1,7 +1,7 @@
 import data
 import numpy
 
-def to_num(matrix, chars_per_line, boundary):
+def to_num(matrix, chars_per_line, boundary, boundaryhl):
     num_array = [0] * chars_per_line
 
     line_size = len(matrix)
@@ -9,8 +9,12 @@ def to_num(matrix, chars_per_line, boundary):
 
     for i in range(line_size):
         for j in range(column_size):
-            if matrix[i][j] > boundary:
-                num_array[i // 2] = num_array[i // 2] + 2 ** ((j * 2) + (i % 2))
+            if boundaryhl == 'l':
+                if matrix[i][j] < boundary:
+                    num_array[i // 2] = num_array[i // 2] + 2 ** ((j * 2) + (i % 2))
+            else:
+                if matrix[i][j] > boundary:
+                    num_array[i // 2] = num_array[i // 2] + 2 ** ((j * 2) + (i % 2))
 
     return num_array
 
@@ -23,19 +27,18 @@ def to_matrix(array, height_index, width):
             array_index = array_index + 1
     return matrix
 
-def px_ascii_art(array, width, height):
+def px_ascii_art(array, width, height, boundary, boundaryhl):
 
     width = width - width % 2
     height = height - height % 4
     number_of_lines = height // 4
     ascii_art = ""
-    boundary = 128
 
     height_index = 0
     while number_of_lines > 0:
         matrix = to_matrix(array, height_index, width)
-        num_array = to_num(matrix, width // 2, boundary)
-        
+        num_array = to_num(matrix, width // 2, boundary, boundaryhl)
+
         for number in num_array:
             ascii_art = ascii_art + chr(data.braileData.get(number))
 
