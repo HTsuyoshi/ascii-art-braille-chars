@@ -1,7 +1,5 @@
 # ascii-art-braille-chars
 
-[TOC]
-
 ## Welcome
 To full-fill personal desires (put waifus in my shell) I created this img to ascii conversor.
 It's a python script that get an image and transform into ascii-art.
