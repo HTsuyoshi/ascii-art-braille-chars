@@ -2,7 +2,7 @@ import convertImg
 import PIL.Image
 
 path = 'Write the path for the file: '
-choose = 'Choose the image width (recommended size: 100): '
+choose = '(Default = 100) Choose the image width: '
 boundary1 = '(Default = 128) Choose the boundary (0-255): '
 boundary2 = 'Paint if the value is higher (h) or lower (l) than boundary: '
 exception1 = 'Width has to be higher than 0'
@@ -10,7 +10,7 @@ exception2 = 'Boundary has to be a number'
 exception3 = 'Boundary has to be lower than 256 and higher than -1'
 exception4 = "The input has to be 'h' or 'l'"
 
-def resize_image(image, new_width=100):
+def resize_image(image, new_width):
     width, height = image.size
     new_height = int(new_width * (height / width))
     new_image = image.resize((new_width, new_height))
@@ -26,9 +26,13 @@ if __name__ == '__main__':
         print(path, 'File not found')
         exit()
 
-    new_image_width = int(input(choose))
-    if new_image_width < 0:
-        raise Exception(exception1)
+    new_image_width = input(choose)
+    if new_image_width != '':
+        new_image_width = int(new_image_width)
+        if new_image_width < 0:
+            raise Exception(exception1)
+    else:
+        new_image_width = 100
 
     image = resize_image(image, new_image_width)
 
