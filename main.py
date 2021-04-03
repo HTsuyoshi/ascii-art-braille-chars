@@ -19,6 +19,12 @@ def resize_image(image, new_width):
 def gray_pixels(image):
     return image.convert("L").getdata()
 
+def set_default(string, default_value):
+    if string == '':
+        return default_value
+    else:
+        return string
+
 if __name__ == '__main__':
     try:
         image = PIL.Image.open(input(path))
@@ -26,36 +32,27 @@ if __name__ == '__main__':
         print(path, 'File not found')
         exit()
 
-    new_image_width = input(choose)
-    if new_image_width != '':
-        new_image_width = int(new_image_width)
-        if new_image_width < 0:
-            raise Exception(exception1)
-    else:
-        new_image_width = 100
-
+    new_image_width = set_default(input(choose), 100)
+    new_image_width = int(new_image_width)
+    if new_image_width < 0:
+        raise Exception(exception1)
     image = resize_image(image, new_image_width)
 
-    boundary = input(boundary1)
-    if boundary != '':
-        if not boundary.isnumeric():
-            raise Exception(exception2)
-        boundary = int(boundary)
-        if boundary > 255 or boundary < 0:
-            raise Exception(exception3)
-    else:
-        boundary = 128
+    boundary = set_default(input(boundary1), '128')
+    if not boundary.isnumeric():
+        raise Exception(exception2)
+    boundary = int(boundary)
+    if boundary > 255 or boundary < 0:
+        raise Exception(exception3)
 
-    boundaryhl = input(boundary2)
-    if boundaryhl != '':
-        if boundaryhl != 'h' and boundaryhl != 'l':
-            raise Exception(exception4)
-    else:
-        boundaryhl = 'h'
+    boundaryhl = set_default(input(boundary2), 'h')
+    if boundaryhl != 'h' and boundaryhl != 'l':
+        raise Exception(exception4)
 
     width, height = image.size
     px_array = gray_pixels(image)
     ascii_art = convertImg.px_ascii_art(px_array, width, height, boundary, boundaryhl)
+
     output_file = open('waifu.txt', 'w')
     output_file.write(ascii_art)
 
