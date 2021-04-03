@@ -1,14 +1,5 @@
-import convertImg
+import convertImg, convertImgRGB, strings
 import PIL.Image
-
-path = 'Write the path for the file: '
-choose = '(Default = 100) Choose the image width: '
-boundary1 = '(Default = 128) Choose the boundary (0-255): '
-boundary2 = 'Paint if the value is higher (h) or lower (l) than boundary: '
-exception1 = 'Width has to be higher than 0'
-exception2 = 'Boundary has to be a number'
-exception3 = 'Boundary has to be lower than 256 and higher than -1'
-exception4 = "The input has to be 'h' or 'l'"
 
 def resize_image(image, new_width):
     width, height = image.size
@@ -16,8 +7,13 @@ def resize_image(image, new_width):
     new_image = image.resize((new_width, new_height))
     return new_image
 
-def gray_pixels(image):
-    return image.convert("L").getdata()
+def recieve_int(integer, exception1, exception2, limit=9999):
+    if not integer.isnumeric():
+        raise Exception(exception1)
+    integer = int(integer)
+    if integer < 0 or integer > limit:
+        raise Exception(exception2)
+    return integer
 
 def set_default(string, default_value):
     if string == '':
@@ -25,33 +21,53 @@ def set_default(string, default_value):
     else:
         return string
 
+def normal_pixels(image):
+    return image.getdata()
+
+def gray_pixels(image):
+    return image.convert("L").getdata()
+
 if __name__ == '__main__':
     try:
-        image = PIL.Image.open(input(path))
+        image = PIL.Image.open(input(strings.path))
     except:
         print(path, 'File not found')
         exit()
 
-    new_image_width = set_default(input(choose), 100)
-    new_image_width = int(new_image_width)
-    if new_image_width < 0:
-        raise Exception(exception1)
+    new_image_width = set_default(input(strings.choose1), '100')
+    new_image_width = recieve_int(new_image_width, strings.exception1, strings.exception8)
+
     image = resize_image(image, new_image_width)
 
-    boundary = set_default(input(boundary1), '128')
-    if not boundary.isnumeric():
-        raise Exception(exception2)
-    boundary = int(boundary)
-    if boundary > 255 or boundary < 0:
-        raise Exception(exception3)
+    boundary = set_default(input(strings.boundary1), '128')
+    boundary = recieve_int(boundary, strings.exception2, strings.exception3, 255)
 
-    boundaryhl = set_default(input(boundary2), 'h')
+    boundaryhl = set_default(input(strings.boundary2), 'h')
     if boundaryhl != 'h' and boundaryhl != 'l':
-        raise Exception(exception4)
+        raise Exception(strings.exception4)
 
+    RGB = set_default(input(strings.choose2),'n')
+    if RGB != 'y' and RGB != 'n':
+        raise Exception(strings.exception5)
+
+    red, green, blue = 0, 0, 0
     width, height = image.size
-    px_array = gray_pixels(image)
-    ascii_art = convertImg.px_ascii_art(px_array, width, height, boundary, boundaryhl)
+    ascii_art = ""
+
+    if RGB == 'y':
+        px_array = normal_pixels(image)
+        red = set_default(input(choose_red), '1')
+        red = recieve_int(red, strings.exception6, strings.exception7)
+        green = set_default(input(choose_green), '1')
+        green = recieve_int(green, strings.exception6, strings.exception7)
+        blue = set_default(input(choose_blue), '1')
+        blue = recieve_int(blue, strings.exception6, strings.exception7)
+        rgb_array = [red, green, blue]
+        ascii_art = convertImgRGB.px_ascii_art(px_array, width, height, boundary, boundaryhl, rgb_array)
+    else:
+        px_array = gray_pixels(image)
+        ascii_art = convertImg.px_ascii_art(px_array, width, height, boundary, boundaryhl)
+
 
     output_file = open('waifu.txt', 'w')
     output_file.write(ascii_art)
