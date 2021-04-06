@@ -47,8 +47,6 @@ if __name__ == '__main__':
     if relative == 'n':
         boundary = set_default(input(strings.boundary1), '128')
         boundary = receive_int(boundary, strings.exception2, strings.exception3, 255)
-    else:
-        boundary = 128
 
     boundaryhl = set_default(input(strings.boundary2), 'h')
     if boundaryhl != 'h' and boundaryhl != 'l':
