@@ -1,7 +1,7 @@
 # ascii-art-braille-chars
 
 ## Welcome
-To full-fill my personal desires (put waifus in my shell) I created this img to UTF-8 conversor.
+To full-fill my personal desires (put waifus in my shell) I created this img to UTF-8 converter.
 It's a python script that get an image and transform into ascii-art.
 
 ## Requirements (python library)
