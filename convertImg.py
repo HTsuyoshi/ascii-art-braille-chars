@@ -1,6 +1,19 @@
 import data
 import numpy
 
+def calculate_boundary(px_array):
+    total = [0, 0, 0]
+    for pixel in px_array:
+        for RGB in range(3):
+            total[RGB] += pixel[RGB]
+
+    for RGB in range(3):
+        total[RGB] = total[RGB] // len(px_array)
+    average = (total[0] + total[1] + total[2]) // 3
+
+    return average
+
+
 def to_num(matrix, chars_per_line, boundary, boundaryhl):
     num_array = [0] * chars_per_line
 
