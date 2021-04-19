@@ -51,9 +51,8 @@ def px_ascii_art(array, width, height, boundary, boundaryhl):
     while number_of_lines > 0:
         matrix = to_matrix(array, height_index, width)
         num_array = to_num(matrix, width // 2, boundary, boundaryhl)
-
         for number in num_array:
-            ascii_art = ascii_art + chr(data.braileData.get(number))
+            ascii_art = ascii_art + chr(data.brailleData[number])
 
         ascii_art = ascii_art + "\n"
         height_index = height_index + 4

@@ -1,4 +1,4 @@
-import convertImg, strings
+import convertImg, strings, data
 import PIL.Image
 
 def resize_image(image, new_width):
@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
 
     relative = set_default(input(strings.choose2),'y')
-    if relative != 'y' and RGB != 'n':
+    if relative != 'y' and relative != 'n':
         raise Exception(strings.exception5)
 
     if relative == 'n':
