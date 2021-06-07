@@ -11,7 +11,7 @@ It's a python script that get an image and transform into ascii-art.
 
 ## Usage
 ```
-python3 main.py
+asciiArt
 ```
 
 ## Preview
