@@ -103,9 +103,10 @@ if __name__ == '__main__':
     new_image_width = arguments.size
     threshold = arguments.threshold
     negative = arguments.negative
+    file_path = arguments.file
 
     try:
-        image = PIL.Image.open(arguments.file)
+        image = PIL.Image.open(file_path)
     except:
         print(arguments.file + ': File not found')
         exit()
