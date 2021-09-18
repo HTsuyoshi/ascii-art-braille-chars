@@ -1,4 +1,6 @@
-# ascii-art-braille-chars
+# ascii-art-braille-chars (depreceated)
+
+New version: [img2ascii](https://github.com/HTsuyoshi/img2ascii)
 
 ## Welcome
 To full-fill my personal desires (put waifus in my shell) I created this img to UTF-8 converter.
