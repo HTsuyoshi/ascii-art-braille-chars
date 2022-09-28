@@ -22,7 +22,7 @@ Build:
 
 ```sh
 make build
-```sh
+```
 
 Run:
 
