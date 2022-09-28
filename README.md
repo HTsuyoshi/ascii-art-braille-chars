@@ -41,11 +41,6 @@ Run:
 
 - docker
 
-## Usage
-```
-asciiArt filePath
-```
-
 ## Preview
 
 Threshold: 100
