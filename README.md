@@ -3,13 +3,43 @@
 New version: [img2ascii](https://github.com/HTsuyoshi/img2ascii)
 
 ## Welcome
+
 To full-fill my personal desires (put waifus in my shell) I created this img to UTF-8 converter.
+
 It's a python script that get an image and transform into ascii-art.
+
+## Usage
+
+### Example (Local)
+
+```sh
+./asciiArt image.jpg -s=500 -t=90
+```
+
+### Example (Docker)
+
+Build:
+
+```sh
+make build
+```sh
+
+Run:
+
+```sh
+./run-docker.sh image.jpg -s=500 -t=90
+```
 
 ## Requirements (python library)
 
+### Local
+
 - numpy
 - PIL
+
+### Docker
+
+- docker
 
 ## Usage
 ```
@@ -18,7 +48,7 @@ asciiArt filePath
 
 ## Preview
 
-Boundary: 100
+Threshold: 100
 
 <img src="./assets/test1.jpg" width="585" />
 ⢉⣽⣿⣿⡿⠛⠡⣿⣿⣿⠟⢫⣶⣿⣿⡿⢋⡔⢺⣿⢧⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣏⡆⠐⣰⣿⣿⣮⠳⠁
@@ -41,7 +71,7 @@ Boundary: 100
 ⡴⠣⠔⠈⢸⠣⣿⣤⣀⠻⣿⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠃⠀⢻⡉⠁⠀⠀⠀⠀
 
 
-Boundary: 80
+Threshold: 80
 
 <img src="./assets/test.jpg" width="585" />
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢀⣿⣿⣿⠃⣼⣷⢹⣿⣿⣿⣧⢸⣿⣿⣼⣽⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⣶⣍⡛⠿⣿⠋⠀⠀⠀⠀⠀⠀

@@ -118,11 +118,8 @@ if __name__ == '__main__':
     if threshold == -1:
         px_array = image.getdata()
         threshold = get_threshold(px_array)
-        
+
     px_array = image.convert("L").getdata()
     ascii_art = px_ascii_art(px_array, width, height, threshold, negative)
-
-    output_file = open('waifu.txt', 'w')
-    output_file.write(ascii_art)
 
     print(ascii_art)
